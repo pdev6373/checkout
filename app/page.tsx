@@ -33,7 +33,7 @@ export default function Home() {
 
               <Link
                 href={product.id.toString()}
-                className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 block rounded-lg no-underline text-center"
+                className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-4 block rounded-lg no-underline text-center"
               >
                 Make an order
               </Link>
