@@ -14,15 +14,16 @@ export default function Home() {
         {products.map((product) => (
           <Col
             key={product.id}
-            span={3}
-            className="shadow shadow-gray-300 text-center p-2 pb-3 min-w-[200px] max-w-[100%] m-2 rounded-md bg-slate-50"
+            flex="auto"
+            // span={3}
+            className="shadow shadow-gray-300 text-center p-2 pb-3 min-w-[150px] max-w-[500px] m-2 rounded-md bg-slate-50 grow"
           >
             <Image
               src={product.image}
               alt={`${product.name} image`}
-              width={200}
-              height={200}
-              className="rounded-md"
+              width={140}
+              height={140}
+              className="rounded-md mx-auto"
             />
             <h3 className="text-xl font-semibold text-slate-950 my-1">
               {product.name}
