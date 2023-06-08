@@ -1,7 +1,5 @@
 "use client";
 import Image from "next/image";
-import { Row, Col } from "antd/es/grid";
-import { Button } from "antd";
 import Link from "next/link";
 import { products } from "./constants";
 
@@ -33,7 +31,7 @@ export default function Home() {
 
               <Link
                 href={product.id.toString()}
-                className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-4 block rounded-lg no-underline text-center"
+                className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-4 block rounded-lg no-underline text-center mb-1"
               >
                 Place an order
               </Link>
