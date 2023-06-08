@@ -1,98 +1,94 @@
-// "use client";
-// import Image from "next/image";
-// import { products } from "../constants";
-// import { useState } from "react";
-// import { Button, Checkbox, Form, Input, Col, Row } from "antd";
+"use client";
+import { products } from "../constants";
+import { useEffect, useState } from "react";
+import { Button, Form, Input } from "antd";
+import { ProductType } from "@/types";
 
-// type CheckoutType = {
-//   params: { productId: string };
-// };
+type CheckoutType = {
+  params: { productId: string };
+};
 
-// export default function Checkout({ params }: CheckoutType) {
-//   const [product, setProduct] = useState(
-//     products.find((product) => product.id.toString() == params.productId)
-//   );
+export default function Checkout({ params }: CheckoutType) {
+  const [product, setProduct] = useState({} as ProductType);
 
-//   if (!product?.id) return <></>;
+  useEffect(() => {
+    setProduct(
+      products.find((product) => product.id.toString() == params.productId) ||
+        ({} as ProductType)
+    );
+  }, []);
 
-//   const onFinish = (values: any) => {
-//     console.log("Success:", values);
-//   };
+  if (!product?.id) return <></>;
 
-//   const onFinishFailed = (errorInfo: any) => {
-//     console.log("Failed:", errorInfo);
-//   };
+  const onFinish = (values: any) => {
+    console.log("Success:", values);
+  };
 
-//   return (
-//     <Row className="tablet:flex-initial tablet:flex-row tablet:min-h-screen">
-//       <Col className="bg-zinc-100 tablet:min-h-screen py-10 text-center w-full tablet:w-[40%] flex flex-col justify-center">
-//         <Image
-//           src={product.image}
-//           alt={`${product.name} image`}
-//           width={200}
-//           height={200}
-//           className="rounded-md mx-auto mb-5"
-//         />
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
 
-//         <h3 className="text-slate-950 text-xl font-semibold mb-2">
-//           {product.name}
-//         </h3>
-//         <span className="font-semibold">Price: {product.price}</span>
-//       </Col>
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <Form
+        layout="vertical"
+        name="checkoutForm"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+        className="shadow w-full max-w-lg px-4 py-8 sm:p-8 rounded-lg border border-neutral-200 border-solid"
+      >
+        <div className="sm:flex justify-between sm:gap-5 flex-wrap">
+          <Form.Item
+            label="First Name"
+            name="firstname"
+            rules={[
+              { required: true, message: "Please enter your first name" },
+            ]}
+            className="grow mb-3 sm:mb-4"
+          >
+            <Input size="large" />
+          </Form.Item>
+          <Form.Item
+            label="Last Name"
+            name="lastname"
+            rules={[{ required: true, message: "Please enter your last name" }]}
+            className="grow mb-3 sm:mb-4"
+          >
+            <Input size="large" />
+          </Form.Item>
+        </div>
 
-//       <Col className="my-auto mx-auto">
-//         <h2 className="text-center text-2xl font-bold p-4">
-//           Enter your Details
-//         </h2>
+        <Form.Item
+          label="Email"
+          rules={[
+            { required: true, message: "Please enter your email address" },
+          ]}
+          name="email"
+          className="mb-3 sm:mb-4"
+        >
+          <Input size="large" />
+        </Form.Item>
 
-//         <Form
-//           name="checkout"
-//           labelCol={{ span: 8 }}
-//           wrapperCol={{
-//             xs: { span: 16 },
-//             sm: { span: 16 },
-//             md: { span: 16 },
-//             lg: { span: 16 },
-//           }}
-//           initialValues={{ remember: true }}
-//           onFinish={onFinish}
-//           onFinishFailed={onFinishFailed}
-//           autoComplete="off"
-//           className="w-[100%] min-w-[100%] tablet:w-[85%] tablet:min-w-[400px]"
-//         >
-//           <Form.Item
-//             label="Name"
-//             name="name"
-//             rules={[{ required: true, message: "Please enter your name" }]}
-//           >
-//             <Input />
-//           </Form.Item>
+        <Form.Item label="Item" name="item" className="mb-3 sm:mb-4">
+          <Input size="large" disabled placeholder={product.name} />
+        </Form.Item>
 
-//           <Form.Item
-//             label="Email"
-//             name="email"
-//             rules={[{ required: true, message: "Please enter your email" }]}
-//           >
-//             <Input />
-//           </Form.Item>
+        <Form.Item label="Price" name="price" className="mb-4.5">
+          <Input size="large" disabled placeholder={product.price} />
+        </Form.Item>
 
-//           <Form.Item>
-//             <Button
-//               type="primary"
-//               htmlType="submit"
-//               className="bg-blue-500 ml-[80px] tablet:ml-[135px]"
-//             >
-//               Checkout
-//             </Button>
-//           </Form.Item>
-//         </Form>
-//       </Col>
-//     </Row>
-//   );
-// }
-
-import React from "react";
-
-export default function page() {
-  return <div>page</div>;
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="w-full"
+            size="large"
+          >
+            Make payment
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
 }
