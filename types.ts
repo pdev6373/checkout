@@ -4,4 +4,5 @@ export type ProductType = {
   price: string;
   imageSrc: string;
   imageAlt: string;
+  currencyCode: string;
 };
