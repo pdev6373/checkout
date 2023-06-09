@@ -52,7 +52,9 @@ export default function Checkout({ params }: CheckoutType) {
     );
 
     if (!res.ok) {
-      setError("Failed to fetch data");
+      setError(
+        "Payment process failed, please check your network and try again."
+      );
       setLoading(false);
       setSuccess(false);
       return;
@@ -149,7 +151,7 @@ export default function Checkout({ params }: CheckoutType) {
           </Form>
 
           {error ? (
-            <p className="text-center text-orange-700">{error}</p>
+            <p className="text-center text-orange-700 text-xs">{error}</p>
           ) : (
             <></>
           )}
