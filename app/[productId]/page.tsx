@@ -3,7 +3,6 @@ import { products } from "../constants";
 import { useEffect, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { ProductType } from "@/types";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface CheckoutType {
@@ -28,7 +27,6 @@ export default function Checkout({ params }: CheckoutType) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     setProduct(
@@ -37,7 +35,7 @@ export default function Checkout({ params }: CheckoutType) {
     );
   }, []);
 
-  const handleMakePayment = async (values: PayloadType): Promise<any> => {
+  const handleMakePayment = async (values: PayloadType) => {
     setLoading(true);
 
     const res = await fetch(
