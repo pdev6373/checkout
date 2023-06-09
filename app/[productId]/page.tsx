@@ -39,7 +39,7 @@ export default function Checkout({ params }: CheckoutType) {
     setLoading(true);
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/transactions/checkout`,
+      `${process.env.NEXT_PUBLIC_PAYMENT_BASE_URL}/transactions/checkout`,
       {
         body: JSON.stringify(values),
         headers: {
